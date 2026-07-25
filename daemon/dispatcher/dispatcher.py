@@ -1,13 +1,19 @@
 from dispatcher.actions import file_sort, reminder
 
+
+def _no_match(**_):
+    return {"summary": "Not sure how to help with that", "detail": ""}
+
+
 TOOL_MAP = {
+    "no_match": _no_match,
     "sort_files": file_sort.run,
     "set_reminder": reminder.run,
 }
 
 
 def dispatch(tool_call: dict) -> dict:
-    name = tool_call.get("name")
+    name = tool_call.get("name", "")
     args = tool_call.get("arguments", {})
 
     fn = TOOL_MAP.get(name)

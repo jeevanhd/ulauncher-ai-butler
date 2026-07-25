@@ -1,17 +1,22 @@
 [
   {
+    "name": "no_match",
+    "description": "Use for anything unrelated to sorting files or reminders",
+    "parameters": {}
+  },
+  {
     "name": "sort_files",
-    "description": "Sort files in a folder into subfolders by type",
+    "description": "Sort files in a folder",
     "parameters": {
-      "folder": { "type": "string", "description": "Path to folder to sort" }
+      "folder": { "type": "string" }
     }
   },
   {
     "name": "set_reminder",
-    "description": "Set a reminder for later",
+    "description": "Set a reminder",
     "parameters": {
-      "text": { "type": "string", "description": "What to remind about" },
-      "minutes": { "type": "integer", "description": "Minutes from now" }
+      "text": { "type": "string" },
+      "minutes": { "type": "integer" }
     }
   }
 ]

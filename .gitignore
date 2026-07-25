@@ -5,3 +5,4 @@ __pycache__/
 daemon/weights/
 daemon/.venv/
 *.log
+daemon/checkpoints/

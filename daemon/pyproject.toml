@@ -6,8 +6,12 @@ requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115",
     "uvicorn>=0.32",
-    "cactus-compute",
+    "needle @ git+https://github.com/cactus-compute/needle.git",
 ]
+
+[tool.uv.sources]
+# needle isn't on PyPI - installed from source, same as the manual venv setup
+
 
 [tool.uv]
 package = false
