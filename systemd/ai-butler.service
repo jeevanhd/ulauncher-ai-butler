@@ -1,0 +1,12 @@
+[Unit]
+Description=AI Butler daemon (Needle)
+After=default.target
+
+[Service]
+WorkingDirectory=%h/ulauncher-ai-butler/daemon
+ExecStart=%h/.local/bin/uv run uvicorn daemon.main:app --host 127.0.0.1 --port 8420
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

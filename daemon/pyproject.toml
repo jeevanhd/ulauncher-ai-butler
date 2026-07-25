@@ -1,0 +1,13 @@
+[project]
+name = "ai-butler-daemon"
+version = "0.1.0"
+description = "Local daemon running Needle for AI Butler ulauncher extension"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.32",
+    "cactus-compute",
+]
+
+[tool.uv]
+package = false

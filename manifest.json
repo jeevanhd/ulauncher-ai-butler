@@ -1,0 +1,26 @@
+{
+  "required_api_version": "2",
+  "name": "AI Butler",
+  "description": "Local AI tool-calling assistant powered by Needle",
+  "developer_name": "jeevan",
+  "icon": "images/icon.webp",
+  "options": {
+    "query_debounce": 0.1
+  },
+  "preferences": [
+    {
+      "id": "butler_kw",
+      "type": "keyword",
+      "name": "Butler",
+      "description": "Ask the butler",
+      "default_value": "bt"
+    },
+    {
+      "id": "daemon_port",
+      "type": "text",
+      "name": "Daemon Port",
+      "description": "Port the AI Butler daemon listens on",
+      "default_value": "8420"
+    }
+  ]
+}
