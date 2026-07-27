@@ -52,7 +52,7 @@ class KeywordQueryEventListener(EventListener):
                     icon=ICON,
                     name=f'Ask: "{query}"',
                     description="Press Enter to run",
-                    on_enter=ExtensionCustomAction(query, keep_app_open=True),
+                    on_enter=ExtensionCustomAction(query),
                 )
             ]
         )
