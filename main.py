@@ -1,3 +1,4 @@
+from socket import timeout
 import subprocess
 import requests
 
@@ -14,10 +15,9 @@ ICON = "images/icon.webp"
 
 def notify(title: str, body: str):
     try:
-        subprocess.Popen(
+        subprocess.run(
             ["notify-send", "-a", "AI Butler", ICON, title, body],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            timeout=2,
         )
     except FileNotFoundError:
         pass
