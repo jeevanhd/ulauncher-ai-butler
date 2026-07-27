@@ -8,7 +8,7 @@ from ulauncher.api.shared.action.RenderResultListAction import RenderResultListA
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
 
 DAEMON_TIMEOUT_SECONDS = 3
-ICON = "images/icon.png"
+ICON = "images/icon.webp"
 
 
 class ButlerExtension(Extension):
@@ -38,8 +38,8 @@ class KeywordQueryEventListener(EventListener):
             [
                 ExtensionResultItem(
                     icon=ICON,
-                    name=f'Ask: "{query}',
-                    description="",
+                    name=f'Ask: "{query}"',
+                    description="Press Enter to run",
                     on_enter=ExtensionCustomAction(query, keep_app_open=True),
                 )
             ]
@@ -49,26 +49,29 @@ class KeywordQueryEventListener(EventListener):
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
         query = event.get_data()
-        port = extension.preference.get("daemon_port", "8420")
+        port = extension.preferences.get("daemon_port", "8420")
 
         try:
-            res = requests.post(
+            resp = requests.post(
                 f"http://127.0.0.1:{port}/query",
                 json={"text": query},
                 timeout=DAEMON_TIMEOUT_SECONDS,
             )
-            res.raise_for_status()
-            data = res.json()
+            resp.raise_for_status()
+            data = resp.json()
             result_text = data.get("summary", "Done")
             description = data.get("detail", "")
         except requests.exceptions.RequestException:
-            result_text = "AI Butler offline"
+            result_text = "AI Butler daemon offline"
             description = "Check systemd service: systemctl --user status ai-butler"
 
         return RenderResultListAction(
             [
                 ExtensionResultItem(
-                    icon=ICON, name=result_text, description=description, on_enter=None
+                    icon=ICON,
+                    name=result_text,
+                    description=description,
+                    on_enter=None,
                 )
             ]
         )
