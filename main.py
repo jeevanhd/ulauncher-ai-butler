@@ -1,3 +1,4 @@
+import subprocess
 import requests
 
 from ulauncher.api.client.Extension import Extension
@@ -9,6 +10,17 @@ from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAct
 
 DAEMON_TIMEOUT_SECONDS = 3
 ICON = "images/icon.webp"
+
+
+def notify(title: str, body: str):
+    try:
+        subprocess.Popen(
+            ["notify-send", "-a", "AI Butler", ICON, title, body],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except FileNotFoundError:
+        pass
 
 
 class ButlerExtension(Extension):
@@ -64,6 +76,8 @@ class ItemEnterEventListener(EventListener):
         except requests.exceptions.RequestException:
             result_text = "AI Butler daemon offline"
             description = "Check systemd service: systemctl --user status ai-butler"
+
+        notify(result_text, description)
 
         return RenderResultListAction(
             [
