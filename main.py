@@ -16,7 +16,7 @@ ICON = "images/icon.webp"
 def notify(title: str, body: str):
     try:
         subprocess.run(
-            ["notify-send", "-a", "AI Butler", ICON, title, body],
+            ["notify-send", "-a", "AI Butler", "-i", ICON, title, body],
             timeout=2,
         )
     except FileNotFoundError:
