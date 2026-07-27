@@ -23,7 +23,7 @@ class KeywordQueryEventListener(EventListener):
         if not query.strip():
             return RenderResultListAction([
                 ExtensionResultItem(
-                    icon="images/icon.png",
+                    icon="images/icon.webp",
                     name="Ask AI Butler something...",
                     description="e.g. bt sort my downloads folder",
                     on_enter=None,
